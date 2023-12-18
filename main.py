@@ -54,6 +54,7 @@ labels = [
         ]
 data = preprocess_data(path)
 print(data[0])
+print(data[1])
 
 
 
