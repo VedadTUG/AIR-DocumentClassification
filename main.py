@@ -154,13 +154,38 @@ def make_sets():
             pickle.dump(data_test, file2)
     return data_train, data_test
 
-labels = [
-    'alt_atheism', 'comp_graphics', 'comp_ms_windows_misc', 'comp_ibm', 'comp_mac', 'comp_windows', 'misc_forsale',
-    'rec_autos', 'rec_motorcycles', 'rec_sport_basketball', 'roc_sport_hockey', 'sci_crypt', 'sci_electronics',
-    'sci_med', 'sci_space', 'soc_religion_christian', 'politics_guns', 'politics_mideast', 'politics_misc,', 'religion_misc'
-        ]
+def create_lookup_table(data: list[str]):
+    lookup_table_dictionary = {}
+    id = 0
+    print('Creating lookup table!')
+    for blog_entry in tqdm(data):
+        tokenised_entry = preprocess_tokenise_single_entry(blog_entry)
+        for token in tokenised_entry:
+            if token not in lookup_table_dictionary:
+                lookup_table_dictionary[token] = id
+                id += 1
+    return lookup_table_dictionary
+
+def convert_set_into_word_indexes(data: list[str], lookup_table):
+    indexed_list = []
+    print('Converting set into indexed set through lookup table!')
+    for blog_entry in tqdm(data):
+        indexed_blog = []
+        tokenised_entry = preprocess_tokenise_single_entry(blog_entry)
+        for token in tokenised_entry:
+            number = lookup_table[token]
+            indexed_blog.append(number)
+        indexed_list.append(indexed_blog)
+    return indexed_list
+
 
 data_train, data_test = make_sets()
+complete_set_data = data_train + data_test
+lookup_table = create_lookup_table(complete_set_data)
+data_train_indexed = convert_set_into_word_indexes(data_train, lookup_table)
+
+
+
 
 
 
