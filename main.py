@@ -1,17 +1,18 @@
 import numpy as np
 import pandas as pd
-import tqdm as tqdm
 import torch as torch
 import sklearn
 import nltk
 import matplotlib as plt
 import seaborn as sns
 import os
+import pickle
 import re
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer
 from pathlib import Path
+from tqdm import tqdm
 nltk.download('stopwords')
 
 def read_data(path):
@@ -109,16 +110,59 @@ def preprocess_data(path: str):
     data = preprocess_stem_words(data)
 
     return data
-path = 'data/20news-bydate-train/alt.atheism'
+
+def create_train_and_test_set():
+    root = 'data/'
+    train_extension = '20news-bydate-train/'
+    test_extension = '20news-bydate-test/'
+    paths = ['alt.atheism', 'comp.graphics', 'comp.os.ms-windows.misc', 'comp.sys.ibm.pc.hardware', 'comp.sys.mac.hardware',
+             'comp.windows.x', 'misc.forsale', 'rec.autos', 'rec.motorcycles', 'rec.sport.baseball', 'rec.sport.hockey',
+             'sci.crypt', 'sci.electronics', 'sci.med', 'sci.space', 'soc.religion.christian', 'talk.politics.guns',
+             'talk.politics.mideast', 'talk.politics.misc', 'talk.religion.misc']
+
+    print("Preprocessing train data")
+    train_set = []
+    for path in tqdm(paths):
+        final_path = root+train_extension+path
+        path_data = preprocess_data(final_path)
+        for blog_post in path_data:
+            train_set.append(blog_post)
+
+    print("Preprocessing test data")
+    test_set = []
+    for path in tqdm(paths):
+        final_path = root + test_extension + path
+        path_data = preprocess_data(final_path)
+        for blog_post in path_data:
+            test_set.append(blog_post)
+
+
+
+    return train_set, test_set
+
+def make_sets():
+    if os.path.exists('data/data_train.pkl') and os.path.exists('data/data_test.pkl'):
+        print('Pickle file already exists, loading data!')
+        with open('data/data_train.pkl', 'rb') as file1, open('data/data_test.pkl', 'rb') as file2:
+            data_train = pickle.load(file1)
+            data_test = pickle.load(file2)
+    else:
+        print('Pickle file does not exist, creating one for easier loading!')
+        data_train, data_test = create_train_and_test_set()
+        with open('data/data_train.pkl', 'wb') as file1, open('data/data_test.pkl', 'wb') as file2:
+            pickle.dump(data_train, file1)
+            pickle.dump(data_test, file2)
+    return data_train, data_test
 
 labels = [
     'alt_atheism', 'comp_graphics', 'comp_ms_windows_misc', 'comp_ibm', 'comp_mac', 'comp_windows', 'misc_forsale',
     'rec_autos', 'rec_motorcycles', 'rec_sport_basketball', 'roc_sport_hockey', 'sci_crypt', 'sci_electronics',
     'sci_med', 'sci_space', 'soc_religion_christian', 'politics_guns', 'politics_mideast', 'politics_misc,', 'religion_misc'
         ]
-data = preprocess_data(path)
-print(data[0])
-#print(data[1])
+
+data_train, data_test = make_sets()
+
+
 
 
 
