@@ -16,10 +16,9 @@ from tqdm import tqdm
 nltk.download('stopwords')
 
 
-class Preprocessing:
+class PreProcessor:
     def __init__(self):
         pass
-
 
     def read_data(self, path):
         final_list_of_blogs = []

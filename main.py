@@ -1,7 +1,7 @@
-from preProcessing import Preprocessing
+from preProcessing import PreProcessor
 
 
-preprocessor = Preprocessing()
+preprocessor = PreProcessor()
 data_train, data_test = preprocessor.make_sets()
 complete_set_data = data_train + data_test
 lookup_table = preprocessor.create_lookup_table(complete_set_data)
