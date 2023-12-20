@@ -182,3 +182,17 @@ class PreProcessor:
                 indexed_blog.append(number)
             indexed_list.append(indexed_blog)
         return indexed_list
+
+    def extract_strings_from_csv(self, column_name: str, filepath: str):
+        df = pd.read_csv(filepath)
+        query_list = df[column_name].to_list()
+        return query_list
+
+    def preprocess_queries(self, data: list[str]):
+        data = self.preprocess_lowercase(data)
+        data = self.preprocess_tokenize(data)
+        data = self.preprocess_remove_stopwords(data)
+        data = self.preprocess_remove_numbers(data)
+        data = self.preprocess_remove_punctuation(data)
+        data = self.preprocess_stem_words(data)
+        return data
