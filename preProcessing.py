@@ -196,3 +196,47 @@ class PreProcessor:
         data = self.preprocess_remove_punctuation(data)
         data = self.preprocess_stem_words(data)
         return data
+
+    def create_labels_for_documents(self):
+        root = 'data/'
+        train_extension = '20news-bydate-train/'
+        test_extension = '20news-bydate-test/'
+        paths = ['alt.atheism', 'comp.graphics', 'comp.os.ms-windows.misc', 'comp.sys.ibm.pc.hardware',
+                 'comp.sys.mac.hardware',
+                 'comp.windows.x', 'misc.forsale', 'rec.autos', 'rec.motorcycles', 'rec.sport.baseball',
+                 'rec.sport.hockey',
+                 'sci.crypt', 'sci.electronics', 'sci.med', 'sci.space', 'soc.religion.christian',
+                 'talk.politics.guns',
+                 'talk.politics.mideast', 'talk.politics.misc', 'talk.religion.misc']
+        print("Preprocessing train data")
+        train_set = []
+        for path in tqdm(paths):
+            final_path = root + train_extension + path
+            path_data = self.preprocess_data(final_path)
+            for blog_post in path_data:
+                data = (path, blog_post)
+                train_set.append(data)
+
+        print("Preprocessing test data")
+        test_set = []
+        for path in tqdm(paths):
+            final_path = root + test_extension + path
+            path_data = self.preprocess_data(final_path)
+            for blog_post in path_data:
+                data = (path, blog_post)
+                test_set.append(data)
+        return train_set, test_set
+
+    def make_labels(self):
+        if os.path.exists('data/data_train_labeled.pkl') and os.path.exists('data/data_test_labeled.pkl'):
+            print('Pickle file already exists, loading data!')
+            with open('data/data_train_labeled.pkl', 'rb') as file1, open('data/data_test_labeled.pkl', 'rb') as file2:
+                data_train_labeled = pickle.load(file1)
+                data_test_labeled = pickle.load(file2)
+        else:
+            print('Pickle file does not exist, creating one for easier loading!')
+            data_train_labeled, data_test_labeled = self.create_labels_for_documents()
+            with open('data/data_train_labeled.pkl', 'wb') as file1, open('data/data_test_labeled.pkl', 'wb') as file2:
+                pickle.dump(data_train_labeled, file1)
+                pickle.dump(data_test_labeled, file2)
+        return data_train_labeled, data_test_labeled
