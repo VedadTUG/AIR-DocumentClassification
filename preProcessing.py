@@ -63,6 +63,7 @@ class PreProcessor:
             final_list.append(word_tokenize(blog_entry))
         return final_list
 
+    #Can be used in order to tokenise a single entry from whatever
     def preprocess_tokenise_single_entry(self, entry: str):
         return word_tokenize(entry)
 
