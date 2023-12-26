@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
-import torch as torch
 import sklearn
+import torch
 import nltk
 import matplotlib as plt
 import seaborn as sns
@@ -162,7 +162,7 @@ class PreProcessor:
 
     def create_lookup_table(self, data: list[str]):
         lookup_table_dictionary = {}
-        id = 0
+        id = 1
         print('Creating lookup table!')
         for blog_entry in tqdm(data):
             tokenised_entry = self.preprocess_tokenise_single_entry(blog_entry)
@@ -172,16 +172,85 @@ class PreProcessor:
                     id += 1
         return lookup_table_dictionary
 
-    def convert_set_into_word_indexes(self, data: list[str], lookup_table):
+    def get_longest_list(self, data: list[list[str]]):
+        length = 0
+        for list in data:
+            if len(list) > length:
+                length = len(list)
+        return length
+
+    def convert_set_into_word_indexes_query(self, data: list[str], lookup_table, max_emb_length):
         indexed_list = []
         print('Converting set into indexed set through lookup table!')
+        relevance_dict = {'alt_atheism': 0, 'comp_graphics': 1, 'comp_ms_windows_misc': 2,
+                          'comp_ibm': 3,
+                          'comp_mac': 4,
+                          'comp_windows': 5, 'misc_forsale': 6, 'rec_autos': 7, 'rec_motorcycles': 8,
+                          'rec_sport_basketball': 9,
+                          'roc_sport_hockey': 10,
+                          'sci_crypt': 11, 'sci_electronics': 12, 'sci_med': 13, 'sci_space': 14,
+                          'soc_religion_christian': 15,
+                          'politics_guns': 16,
+                          'politics_mideast': 17, 'politics_misc': 18, 'religion_misc': 19}
+
         for blog_entry in tqdm(data):
-            indexed_blog = []
-            tokenised_entry = self.preprocess_tokenise_single_entry(blog_entry)
-            for token in tokenised_entry:
-                number = lookup_table[token]
-                indexed_blog.append(number)
-            indexed_list.append(indexed_blog)
+            if type(blog_entry) is tuple:
+                relevance_entry = relevance_dict[blog_entry[0]]
+                blog_entry = blog_entry[1]
+                indexed_blog = []
+                tokenised_entry = self.preprocess_tokenise_single_entry(blog_entry)
+                for token in tokenised_entry:
+                    number = lookup_table[token]
+                    indexed_blog.append(number)
+                if len(indexed_blog) >= max_emb_length:
+                    indexed_blog = indexed_blog[:max_emb_length]
+                else:
+                    padded_list = indexed_blog[:]
+                    while len(padded_list) < max_emb_length:
+                        padded_list.append(0)
+                        indexed_blog = padded_list
+                indexed_list.append((indexed_blog, relevance_entry))
+        return indexed_list
+
+    def convert_set_into_word_indexes(self, data: list[str], lookup_table, max_emb_length):
+        indexed_list = []
+        print('Converting set into indexed set through lookup table!')
+        relevance_dict = {'alt.atheism': 0, 'comp.graphics': 1, 'comp.os.ms-windows.misc': 2,
+                          'comp.sys.ibm.pc.hardware': 3,
+                          'comp.sys.mac.hardware': 4,
+                          'comp.windows.x': 5, 'misc.forsale': 6, 'rec.autos': 7, 'rec.motorcycles': 8,
+                          'rec.sport.baseball': 9,
+                          'rec.sport.hockey': 10,
+                          'sci.crypt': 11, 'sci.electronics': 12, 'sci.med': 13, 'sci.space': 14,
+                          'soc.religion.christian': 15,
+                          'talk.politics.guns': 16,
+                          'talk.politics.mideast': 17, 'talk.politics.misc': 18, 'talk.religion.misc': 19}
+
+
+        for blog_entry in tqdm(data):
+            if type(blog_entry) is tuple:
+                relevance_entry = relevance_dict[blog_entry[0]]
+                blog_entry = blog_entry[1]
+                indexed_blog = []
+                tokenised_entry = self.preprocess_tokenise_single_entry(blog_entry)
+                for token in tokenised_entry:
+                    number = lookup_table[token]
+                    indexed_blog.append(number)
+                if len(indexed_blog) >= max_emb_length:
+                    indexed_blog = indexed_blog[:max_emb_length]
+                else:
+                    padded_list = indexed_blog[:]
+                    while len(padded_list) < max_emb_length:
+                        padded_list.append(0)
+                        indexed_blog = padded_list
+                indexed_list.append((indexed_blog, relevance_entry))
+            else:
+                indexed_blog = []
+                tokenised_entry = self.preprocess_tokenise_single_entry(blog_entry)
+                for token in tokenised_entry:
+                    number = lookup_table[token]
+                    indexed_blog.append(number)
+                indexed_list.append(indexed_blog)
         return indexed_list
 
     def extract_strings_from_csv(self, column_name: str, filepath: str):
@@ -197,6 +266,14 @@ class PreProcessor:
         data = self.preprocess_remove_punctuation(data)
         data = self.preprocess_stem_words(data)
         return data
+
+    def create_query_set(self, text:list[str], labels: list[str]):
+
+        queries = []
+        for i in range(len(text)):
+            queries.append((labels[i], text[i]))
+        return queries
+
 
     def create_labels_for_documents(self):
         root = 'data/'

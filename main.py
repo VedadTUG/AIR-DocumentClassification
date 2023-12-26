@@ -3,8 +3,19 @@ from naiveBayesClassifier import NaiveBayesClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.naive_bayes import MultinomialNB
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, accuracy_score
 import numpy as np
+import torch
+from torch import nn, optim
+from torch.nn.utils.rnn import pad_sequence
+from torch.utils.data import DataLoader, Dataset
+from rnn import create_dataset
+from rnn import RNN
+from cnn import CNN
+from tqdm import tqdm
+from torch.optim import Adam
+
+
 
 def calculate_tf_idf(documents: list[str], query: str, number_of_documents : int):
     tfidf_vectoriser = TfidfVectorizer()
@@ -24,29 +35,45 @@ preprocessor = PreProcessor()
 data_train, data_test = preprocessor.make_sets()
 complete_set_data = data_train + data_test
 lookup_table = preprocessor.create_lookup_table(complete_set_data)
-data_train_indexed = preprocessor.convert_set_into_word_indexes(data_train, lookup_table)
-
+#print(lookup_table)
+data_train_indexed = preprocessor.convert_set_into_word_indexes(data_train, lookup_table, 0)
+length = preprocessor.get_longest_list(data_train_indexed) #13820
 data_train_single_list = preprocessor.preprocess_tokenise_single_entry(data_train[0])
 
+
+
+
+max_length = 25
+batch_size = 50
 queries_text = preprocessor.extract_strings_from_csv('query_text', 'data/queries.csv')
+queries_labels = preprocessor.extract_strings_from_csv('query_label', 'data/queries.csv')
 queries_text = preprocessor.preprocess_queries(queries_text)
+
+query_data_labeled = preprocessor.create_query_set(queries_text, queries_labels)
+converted_queries = preprocessor.convert_set_into_word_indexes_query(query_data_labeled, lookup_table, max_length)
 #calculate_tf_idf(complete_set_data, queries_text[0], 5)
-
 train_data_labeled, test_data_labeled = preprocessor.make_labels()
-
-naivebayes = NaiveBayesClassifier()
-naivebayes.naiveBayes(train_data_labeled, test_data_labeled)
+converted_doc = preprocessor.convert_set_into_word_indexes(train_data_labeled, lookup_table, max_length)
 
 
+train_dataset = create_dataset(converted_doc)
+test_dataset = create_dataset(converted_queries)
+
+train_loader = DataLoader(train_dataset, batch_size=batch_size)
+test_loader = DataLoader(test_dataset, batch_size=batch_size)
 
 
-
-
-
-
-
-
-
+#naivebayes = NaiveBayesClassifier()
+#naivebayes.naiveBayes(train_data_labeled, test_data_labeled)
 
 
 
+epochs = 2
+learning_rate = 1e-3
+loss_fn = nn.CrossEntropyLoss()
+rnn_classifier = RNN()
+optimizer = Adam(rnn_classifier.parameters(), lr=learning_rate)
+#RNN.TrainModel(rnn_classifier, loss_fn, optimizer, train_loader, test_loader, epochs)
+
+cnn_classifier = CNN()
+CNN.TrainModel(cnn_classifier, loss_fn, optimizer, train_loader, test_loader, epochs)
