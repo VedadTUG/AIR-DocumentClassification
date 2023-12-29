@@ -11,7 +11,7 @@ from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data import DataLoader, Dataset
 from rnn import create_dataset
 from rnn import RNN
-from rnn import MakePredictions
+from predictions import MakePredictions
 from cnn import CNN
 from tqdm import tqdm
 from torch.optim import Adam
@@ -47,8 +47,8 @@ data_train_single_list = preprocessor.preprocess_tokenise_single_entry(data_trai
 
 max_length = 50
 batch_size = 50
-epochs = 10
-learning_rate = 0.01
+epochs = 5
+learning_rate = 0.001
 loss_fn = nn.CrossEntropyLoss()
 rnn_classifier = RNN()
 optimizer = Adam(rnn_classifier.parameters(), lr=learning_rate)
@@ -80,7 +80,7 @@ val_loader = DataLoader(val_dataset, batch_size=batch_size)
 #naivebayes.naiveBayes(train_data_labeled, test_data_labeled)
 
 
-#RNN.TrainModel(rnn_classifier, loss_fn, optimizer, train_loader, test_loader, epochs)
-#MakePredictions(rnn_classifier, val_loader)
-CNN.TrainModel(cnn_classifier, loss_fn, optimizer, train_loader, test_loader, epochs)
-MakePredictions(cnn_classifier, val_loader)
+RNN.TrainModel(rnn_classifier, loss_fn, optimizer, train_loader, test_loader, epochs)
+MakePredictions(rnn_classifier, val_loader, 5)
+#CNN.TrainModel(cnn_classifier, loss_fn, optimizer, train_loader, test_loader, epochs)
+#MakePredictions(cnn_classifier, val_loader)

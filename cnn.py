@@ -22,8 +22,8 @@ embed_len = 150
 hidden_dim = 50
 n_layers=1
 n_filters = 3
-filter_sizes=[1, 2, 3, 4, 5]
-num_filters=36
+filter_sizes=[1, 5, 10, 15]
+num_filters=10
 num_classes=20
 dropout=0.2
 vocab_size = 130317
@@ -37,7 +37,7 @@ class CNN(nn.Module):
         # TODO: Add your layers below
         self.embedding = nn.Embedding(vocab_size, embed_len)
         self.convs1 = nn.ModuleList([nn.Conv2d(1, num_filters, (K, embed_len)) for K in filter_sizes])
-        self.dropout = nn.Dropout(0.1)
+        self.dropout = nn.Dropout(dropout)
         self.fc1 = nn.Linear(len(filter_sizes) * num_filters, num_classes)
 
     def forward(self, x):
@@ -48,13 +48,16 @@ class CNN(nn.Module):
         x = torch.cat(x, 1)
         x = self.dropout(x)
         logit = self.fc1(x)
+        #scaled_output = 19 * torch.sigmoid(logit)
         return logit
+
 
 
     def TrainModel(model, loss_fn, optimizer, train_loader, val_loader, epochs):
 
-        model.train()
+
         for i in range(1, epochs+1):
+            model.train()
             losses = []
             for batch, (X, Y) in enumerate(tqdm(train_loader)):
                 token_tensor = torch.stack(X)
