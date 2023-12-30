@@ -62,19 +62,25 @@ def calculateF1K(Y_pred, Y_true, k):
 
 #https://coderzcolumn.com/tutorials/artificial-intelligence/pytorch-rnn-for-text-classification-tasks
 def MakePredictions(model, loader, kmost = 0):
+    device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+
     Y_shuffled, Y_preds = [], []
     for X, Y in loader:
         token_tensor = torch.stack(X)
         token_tensor = token_tensor.permute(1, 0)
+        token_tensor = token_tensor.to(device)
         target_tensor = Y
+        target_tensor = target_tensor.to(device)
         preds = model(token_tensor.round())
         Y_preds.append(preds)
         Y_shuffled.append(target_tensor)
     gc.collect()
-    Y_preds, Y_shuffled = torch.cat(Y_preds), torch.cat(Y_shuffled)
+    Y_preds, Y_shuffled = torch.cat(Y_preds).cpu(), torch.cat(Y_shuffled).cpu()
 
 
     f1k= calculateF1K(Y_preds, Y_shuffled, kmost)
+
+
 
     Y_actual, Y_preds =  Y_shuffled.detach().numpy(), F.softmax(Y_preds, dim=-1).argmax(dim=-1).detach().numpy()
 

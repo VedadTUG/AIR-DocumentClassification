@@ -18,80 +18,40 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 import gc
 import scikitplot as skplt
 
-embed_len = 150
-hidden_dim = 50
-n_layers=1
-n_filters = 3
-filter_sizes=[1, 5, 10, 15]
+#embed_len = 150
+#hidden_dim = 50
+#n_layers=1
+#n_filters = 3
+filter_sizes=[3,4,5]
 num_filters=10
-num_classes=20
-dropout=0.2
-vocab_size = 130317
+#num_classes=20
+dropout=0.5
+#vocab_size = 130317
 
 
 #https://chriskhanhtran.github.io/posts/cnn-sentence-classification/
 #new class: https://www.kaggle.com/code/mlwhiz/multiclass-text-classification-pytorch
+#https://chat.openai.com/share/9a9d3ad2-b53f-43b4-92ef-846257d1b40f
 class CNN(nn.Module):
-    def __init__(self):
+    def __init__(self, vocab_size, embedding_dim, num_classes):
         super(CNN, self).__init__()
         # TODO: Add your layers below
-        self.embedding = nn.Embedding(vocab_size, embed_len)
-        self.convs1 = nn.ModuleList([nn.Conv2d(1, num_filters, (K, embed_len)) for K in filter_sizes])
+        self.embedding = nn.Embedding(vocab_size, embedding_dim)
+        self.convs = nn.ModuleList([
+            nn.Conv2d(1, num_filters, (size, embedding_dim)) for size in filter_sizes
+        ])
         self.dropout = nn.Dropout(dropout)
-        self.fc1 = nn.Linear(len(filter_sizes) * num_filters, num_classes)
+        self.fc = nn.Linear(num_filters * len(filter_sizes), num_classes)
 
     def forward(self, x):
-        x = self.embedding(x)
-        x = x.unsqueeze(1)
-        x = [F.relu(conv(x)).squeeze(3) for conv in self.convs1]
-        x = [F.max_pool1d(i, i.size(2)).squeeze(2) for i in x]
-        x = torch.cat(x, 1)
-        x = self.dropout(x)
-        logit = self.fc1(x)
-        #scaled_output = 19 * torch.sigmoid(logit)
-        return logit
+        x = self.embedding(x)  # Apply embedding layer
+        x = x.unsqueeze(1)  # Add 1 channel for convolution operation
 
+        # Perform convolution and max pooling operations
+        conv_outputs = [torch.relu(conv(x)).squeeze(3) for conv in self.convs]
+        pooled_outputs = [torch.max(conv_output, 2)[0] for conv_output in conv_outputs]
+        pooled_outputs = torch.cat(pooled_outputs, 1)
 
-
-    def TrainModel(model, loss_fn, optimizer, train_loader, val_loader, epochs):
-
-
-        for i in range(1, epochs+1):
-            model.train()
-            losses = []
-            for batch, (X, Y) in enumerate(tqdm(train_loader)):
-                token_tensor = torch.stack(X)
-                token_tensor = token_tensor.permute(1, 0)
-                token_tensor = token_tensor
-                target_tensor = Y
-
-                Y_preds = model(token_tensor)
-                loss = loss_fn(Y_preds, target_tensor)
-                losses.append(loss.item())
-
-                optimizer.zero_grad()
-                loss.backward()
-                optimizer.step()
-
-            print("Train Loss : {:.3f}".format(torch.tensor(losses).mean()))
-
-            model.eval()
-            with torch.no_grad():
-                Y_shuffled, Y_preds, losses = [], [], []
-                for X, Y in val_loader:
-                    token_tensor = torch.stack(X)
-                    token_tensor = token_tensor.permute(1, 0)
-                    target_tensor = Y
-                    preds = model(token_tensor)
-                    loss = loss_fn(preds, target_tensor)
-                    losses.append(loss.item())
-
-                    Y_shuffled.append(target_tensor)
-                    Y_preds.append(preds.argmax(dim=-1))
-
-                Y_shuffled = torch.cat(Y_shuffled)
-                Y_preds = torch.cat(Y_preds)
-
-                print("Valid Loss : {:.3f}".format(torch.tensor(losses).mean()))
-                print(
-                    "Valid Acc  : {:.3f}".format(accuracy_score(Y_shuffled.detach().numpy(), Y_preds.detach().numpy())))
+        x = self.dropout(pooled_outputs)
+        x = self.fc(x)
+        return x

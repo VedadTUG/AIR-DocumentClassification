@@ -202,17 +202,20 @@ class PreProcessor:
                 for token in tokenised_entry:
                     number = lookup_table[token]
                     indexed_blog.append(number)
-                if len(indexed_blog) >= max_emb_length:
-                    indexed_blog = indexed_blog[:max_emb_length]
+                if max_emb_length is None:
+                    continue
                 else:
-                    padded_list = indexed_blog[:]
-                    while len(padded_list) < max_emb_length:
-                        padded_list.append(0)
-                        indexed_blog = padded_list
+                    if len(indexed_blog) >= max_emb_length:
+                        indexed_blog = indexed_blog[:max_emb_length]
+                    else:
+                        padded_list = indexed_blog[:]
+                        while len(padded_list) < max_emb_length:
+                            padded_list.append(0)
+                            indexed_blog = padded_list
                 indexed_list.append((indexed_blog, relevance_entry))
         return indexed_list
 
-    def convert_set_into_word_indexes(self, data: list[str], lookup_table, max_emb_length):
+    def convert_set_into_word_indexes(self, data: list[str], lookup_table, max_emb_length = None):
         indexed_list = []
         print('Converting set into indexed set through lookup table!')
         relevance_dict = {'alt.atheism': 0, 'comp.graphics': 1, 'comp.os.ms-windows.misc': 2,
@@ -236,13 +239,16 @@ class PreProcessor:
                 for token in tokenised_entry:
                     number = lookup_table[token]
                     indexed_blog.append(number)
-                if len(indexed_blog) >= max_emb_length:
-                    indexed_blog = indexed_blog[:max_emb_length]
+                if max_emb_length is None:
+                    continue
                 else:
-                    padded_list = indexed_blog[:]
-                    while len(padded_list) < max_emb_length:
-                        padded_list.append(0)
-                        indexed_blog = padded_list
+                    if len(indexed_blog) >= max_emb_length:
+                        indexed_blog = indexed_blog[:max_emb_length]
+                    else:
+                        padded_list = indexed_blog[:]
+                        while len(padded_list) < max_emb_length:
+                            padded_list.append(0)
+                            indexed_blog = padded_list
                 indexed_list.append((indexed_blog, relevance_entry))
             else:
                 indexed_blog = []

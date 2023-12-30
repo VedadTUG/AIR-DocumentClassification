@@ -12,6 +12,7 @@ from torch.utils.data import DataLoader, Dataset
 from rnn import create_dataset
 from rnn import RNN
 from predictions import MakePredictions
+from training import TrainModel
 from cnn import CNN
 from tqdm import tqdm
 from torch.optim import Adam
@@ -46,13 +47,19 @@ data_train_single_list = preprocessor.preprocess_tokenise_single_entry(data_trai
 
 
 max_length = 50
-batch_size = 50
+embedding_dim = 100
+hidden_dim = 128
+num_classes = 20
+batch_size = 32
+vocab_size = len(lookup_table) + 1
 epochs = 5
 learning_rate = 0.001
+
+
 loss_fn = nn.CrossEntropyLoss()
-rnn_classifier = RNN()
-optimizer = Adam(rnn_classifier.parameters(), lr=learning_rate)
-cnn_classifier = CNN()
+rnn_classifier = RNN(vocab_size, embedding_dim, hidden_dim, num_classes)
+optimizer = torch.optim.Adam(rnn_classifier.parameters(), lr=learning_rate)
+cnn_classifier = CNN(vocab_size, embedding_dim, num_classes)
 
 
 queries_text = preprocessor.extract_strings_from_csv('query_text', 'data/queries.csv')
@@ -80,7 +87,7 @@ val_loader = DataLoader(val_dataset, batch_size=batch_size)
 #naivebayes.naiveBayes(train_data_labeled, test_data_labeled)
 
 
-RNN.TrainModel(rnn_classifier, loss_fn, optimizer, train_loader, test_loader, epochs)
-MakePredictions(rnn_classifier, val_loader, 5)
-#CNN.TrainModel(cnn_classifier, loss_fn, optimizer, train_loader, test_loader, epochs)
-#MakePredictions(cnn_classifier, val_loader)
+#TrainModel(rnn_classifier, loss_fn, optimizer, train_loader, test_loader, epochs)
+#MakePredictions(rnn_classifier, val_loader, 5)
+TrainModel(cnn_classifier, loss_fn, optimizer, train_loader, test_loader, epochs)
+MakePredictions(cnn_classifier, val_loader)
