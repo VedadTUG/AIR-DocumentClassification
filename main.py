@@ -7,16 +7,14 @@ from sklearn.metrics import classification_report, accuracy_score
 import numpy as np
 import torch
 from torch import nn, optim
-from torch.nn.utils.rnn import pad_sequence
-from torch.utils.data import DataLoader, Dataset
+
+from torch.utils.data import DataLoader
 from rnn import create_dataset
 from rnn import RNN
 from predictions import MakePredictions
 from training import TrainModel
 from cnn import CNN
-from tqdm import tqdm
-from torch.optim import Adam
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
 
 
 
@@ -54,12 +52,18 @@ batch_size = 32
 vocab_size = len(lookup_table) + 1
 epochs = 5
 learning_rate = 0.001
+k = 5
 
+#For CNN only
+filter_sizes=[10,20,30]
+num_filters=100
+dropout=0.5
 
 loss_fn = nn.CrossEntropyLoss()
 rnn_classifier = RNN(vocab_size, embedding_dim, hidden_dim, num_classes)
-optimizer = torch.optim.Adam(rnn_classifier.parameters(), lr=learning_rate)
-cnn_classifier = CNN(vocab_size, embedding_dim, num_classes)
+optimizer_rnn = torch.optim.Adam(rnn_classifier.parameters(), lr=learning_rate)
+cnn_classifier = CNN(vocab_size, embedding_dim, num_classes, dropout, num_filters, filter_sizes)
+optimizer_cnn = torch.optim.Adam(cnn_classifier.parameters(), lr=learning_rate)
 
 
 queries_text = preprocessor.extract_strings_from_csv('query_text', 'data/queries.csv')
@@ -83,11 +87,11 @@ test_loader = DataLoader(test_dataset, batch_size=batch_size)
 val_loader = DataLoader(val_dataset, batch_size=batch_size)
 
 
-#naivebayes = NaiveBayesClassifier()
-#naivebayes.naiveBayes(train_data_labeled, test_data_labeled)
+naivebayes = NaiveBayesClassifier()
+naivebayes.naiveBayes(train_data_labeled, test_data_labeled, k)
 
+TrainModel(rnn_classifier, loss_fn, optimizer_rnn, train_loader, test_loader, epochs)
+MakePredictions(rnn_classifier, val_loader, k)
 
-#TrainModel(rnn_classifier, loss_fn, optimizer, train_loader, test_loader, epochs)
-#MakePredictions(rnn_classifier, val_loader, 5)
-TrainModel(cnn_classifier, loss_fn, optimizer, train_loader, test_loader, epochs)
-MakePredictions(cnn_classifier, val_loader)
+TrainModel(cnn_classifier, loss_fn, optimizer_cnn, train_loader, test_loader, epochs)
+MakePredictions(cnn_classifier, val_loader, k)

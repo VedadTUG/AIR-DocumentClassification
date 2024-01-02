@@ -15,6 +15,18 @@ from pathlib import Path
 from tqdm import tqdm
 nltk.download('stopwords')
 
+relevance_dict_new = {'alt.atheism': 0, 'comp.graphics': 1, 'comp.os.ms-windows.misc': 2,
+                      'comp.sys.ibm.pc.hardware': 3,
+                      'comp.sys.mac.hardware': 4,
+                      'comp.windows.x': 5, 'misc.forsale': 6, 'rec.autos': 7, 'rec.motorcycles': 8,
+                      'rec.sport.baseball': 9,
+                      'rec.sport.hockey': 10,
+                      'sci.crypt': 11, 'sci.electronics': 12, 'sci.med': 13, 'sci.space': 14,
+                      'soc.religion.christian': 15,
+                      'talk.politics.guns': 16,
+                      'talk.politics.mideast': 17, 'talk.politics.misc': 18, 'talk.religion.misc': 19}
+
+
 
 class PreProcessor:
     def __init__(self):
@@ -218,21 +230,12 @@ class PreProcessor:
     def convert_set_into_word_indexes(self, data: list[str], lookup_table, max_emb_length = None):
         indexed_list = []
         print('Converting set into indexed set through lookup table!')
-        relevance_dict = {'alt.atheism': 0, 'comp.graphics': 1, 'comp.os.ms-windows.misc': 2,
-                          'comp.sys.ibm.pc.hardware': 3,
-                          'comp.sys.mac.hardware': 4,
-                          'comp.windows.x': 5, 'misc.forsale': 6, 'rec.autos': 7, 'rec.motorcycles': 8,
-                          'rec.sport.baseball': 9,
-                          'rec.sport.hockey': 10,
-                          'sci.crypt': 11, 'sci.electronics': 12, 'sci.med': 13, 'sci.space': 14,
-                          'soc.religion.christian': 15,
-                          'talk.politics.guns': 16,
-                          'talk.politics.mideast': 17, 'talk.politics.misc': 18, 'talk.religion.misc': 19}
+
 
 
         for blog_entry in tqdm(data):
             if type(blog_entry) is tuple:
-                relevance_entry = relevance_dict[blog_entry[0]]
+                relevance_entry = relevance_dict_new[blog_entry[0]]
                 blog_entry = blog_entry[1]
                 indexed_blog = []
                 tokenised_entry = self.preprocess_tokenise_single_entry(blog_entry)
@@ -324,3 +327,4 @@ class PreProcessor:
                 pickle.dump(data_train_labeled, file1)
                 pickle.dump(data_test_labeled, file2)
         return data_train_labeled, data_test_labeled
+

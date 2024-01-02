@@ -3,7 +3,7 @@ matplotlib.use('TkAgg')
 from tqdm import tqdm
 import torch
 
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.metrics import accuracy_score
 
 
 
