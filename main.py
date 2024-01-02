@@ -47,7 +47,7 @@ hidden_dim = 128
 num_classes = 20
 batch_size = 32
 vocab_size = len(lookup_table) + 1
-epochs = 5
+epochs = 15
 learning_rate = 0.001
 k = 5
 
