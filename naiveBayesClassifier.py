@@ -1,6 +1,13 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
-from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.metrics import classification_report, confusion_matrix, recall_score, accuracy_score
+import scikitplot as skplt
+import matplotlib
+matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
+from preProcessing import PreProcessor
+
+test_classes = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
 
 class NaiveBayesClassifier:
     def __init__(self):
@@ -51,7 +58,21 @@ class NaiveBayesClassifier:
             print(f1_at_k)
 
 
+        print("Test Accuracy : {}".format(accuracy_score(test_labels, predicted_labels)))
         print("Classification Report on Test Set:")
         print(classification_report(test_labels, predicted_labels))
         print("\nConfusion Matrix : ")
         print(confusion_matrix(test_labels, predicted_labels))
+
+        preprocess = PreProcessor()
+        test_index = preprocess.get_index_labels(test_labels)
+        predict_index = preprocess.get_index_labels(predicted_labels)
+
+        skplt.metrics.plot_confusion_matrix([test_classes[i] for i in test_index], [test_classes[i] for i in predict_index],
+                                            normalize=True,
+                                            title="Confusion Matrix",
+                                            cmap="Purples",
+                                            hide_zeros=True,
+                                            figsize=(15, 15)
+                                            )
+        plt.show()

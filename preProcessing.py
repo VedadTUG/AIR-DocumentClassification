@@ -328,3 +328,10 @@ class PreProcessor:
                 pickle.dump(data_test_labeled, file2)
         return data_train_labeled, data_test_labeled
 
+
+
+    def get_index_labels(self, labels : list[str]):
+        index_labels = []
+        for label in labels:
+            index_labels.append(relevance_dict_new[label])
+        return index_labels

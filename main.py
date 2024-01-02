@@ -2,9 +2,6 @@ from preProcessing import PreProcessor
 from naiveBayesClassifier import NaiveBayesClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.metrics import classification_report, accuracy_score
-import numpy as np
 import torch
 from torch import nn, optim
 
