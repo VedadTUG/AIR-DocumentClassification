@@ -95,7 +95,4 @@ def TrainModel(model, loss_fn, optimizer, train_loader, val_loader, epochs):
             print(
                 "Valid Acc  : {:.3f}".format(accuracy_score(Y_shuffled.detach().numpy(), Y_preds.detach().numpy())))
 
-    print(train_losses)
-    print(valid_losses)
-    print(valid_acc)
     create_plot(epochs, train_losses, valid_losses, valid_acc)
