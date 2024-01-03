@@ -47,7 +47,7 @@ hidden_dim = 128
 num_classes = 20
 batch_size = 32
 vocab_size = len(lookup_table) + 1
-epochs = 15
+epochs = 10
 learning_rate = 0.001
 k = 5
 
@@ -88,7 +88,7 @@ naivebayes = NaiveBayesClassifier()
 naivebayes.naiveBayes(train_data_labeled, test_data_labeled, k)
 
 TrainModel(rnn_classifier, loss_fn, optimizer_rnn, train_loader, test_loader, epochs)
-MakePredictions(rnn_classifier, val_loader, k)
+MakePredictions(rnn_classifier, val_loader,"RNN", k )
 
 TrainModel(cnn_classifier, loss_fn, optimizer_cnn, train_loader, test_loader, epochs)
-MakePredictions(cnn_classifier, val_loader, k)
+MakePredictions(cnn_classifier, val_loader,"CNN", k)

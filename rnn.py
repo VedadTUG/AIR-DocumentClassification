@@ -1,8 +1,6 @@
 from torch import nn
 from torch.utils.data import Dataset
 
-
-
 class create_dataset(Dataset):
     def __init__(self, data):
         self.data = data
@@ -13,8 +11,6 @@ class create_dataset(Dataset):
     def __getitem__(self, index):
         input, target = self.data[index]
         return input, target
-
-
 
 
 #https://medium.com/@spandey8312/text-classification-using-custom-data-and-pytorch-d88ba1087045

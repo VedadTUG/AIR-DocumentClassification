@@ -75,4 +75,4 @@ class NaiveBayesClassifier:
                                             hide_zeros=True,
                                             figsize=(15, 15)
                                             )
-        plt.show()
+        plt.savefig(f'bayes.png')

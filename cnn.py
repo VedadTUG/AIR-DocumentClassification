@@ -2,14 +2,7 @@ import torch.nn.functional as F
 import torch
 from torch import nn
 
-
-
-
-
-
-
-#new class: https://www.kaggle.com/code/mlwhiz/multiclass-text-classification-pytorch
-
+#https://www.kaggle.com/code/mlwhiz/multiclass-text-classification-pytorch
 class CNN(nn.Module):
     def __init__(self, vocab_size, embedding_dim, num_classes, dropout, num_filters, filter_sizes):
         super(CNN, self).__init__()

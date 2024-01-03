@@ -45,7 +45,7 @@ def calculateF1K(Y_pred, Y_true, k):
 
 
 #https://coderzcolumn.com/tutorials/artificial-intelligence/pytorch-rnn-for-text-classification-tasks
-def MakePredictions(model, loader, kmost = 0):
+def MakePredictions(model, loader, name, kmost = None ):
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 
     Y_shuffled, Y_preds = [], []
@@ -61,13 +61,15 @@ def MakePredictions(model, loader, kmost = 0):
     gc.collect()
     Y_preds, Y_shuffled = torch.cat(Y_preds).cpu(), torch.cat(Y_shuffled).cpu()
 
-    f1k = calculateF1K(Y_preds, Y_shuffled, kmost)
+    if kmost is not None:
+        f1k = calculateF1K(Y_preds, Y_shuffled, kmost)
+        print(f"General F1@{kmost} is:")
+        print(f1k)
 
     Y_actual, Y_preds = Y_shuffled.detach().numpy(), F.softmax(Y_preds, dim=-1).argmax(dim=-1).detach().numpy()
 
 
-    print(f"General F1@{kmost} is:")
-    print(f1k)
+
     print("Test Accuracy : {}".format(accuracy_score(Y_actual, Y_preds)))
     print("\nClassification Report : ")
     print(classification_report(Y_actual, Y_preds, target_names=target_classes,  zero_division='warn'))
@@ -81,5 +83,5 @@ def MakePredictions(model, loader, kmost = 0):
                                         hide_zeros=True,
                                         figsize=(15, 15)
                                         )
+    plt.savefig(f'{name}.png')
 
-    plt.show()
