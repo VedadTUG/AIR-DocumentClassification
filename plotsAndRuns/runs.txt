@@ -1,0 +1,750 @@
+BAYES--------------------------------------------------------------
+F1@k for Test Set (Top-5):
+0.31580810762966416
+Test Accuracy : 0.7777482740308019
+Classification Report on Test Set:
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.85      0.50      0.63       319
+           comp.graphics       0.74      0.70      0.72       389
+ comp.os.ms-windows.misc       0.77      0.62      0.69       394
+comp.sys.ibm.pc.hardware       0.62      0.79      0.69       392
+   comp.sys.mac.hardware       0.82      0.77      0.80       385
+          comp.windows.x       0.86      0.78      0.81       395
+            misc.forsale       0.92      0.66      0.77       390
+               rec.autos       0.85      0.91      0.88       396
+         rec.motorcycles       0.93      0.93      0.93       398
+      rec.sport.baseball       0.96      0.93      0.94       397
+        rec.sport.hockey       0.91      0.97      0.94       399
+               sci.crypt       0.65      0.94      0.77       396
+         sci.electronics       0.79      0.63      0.70       393
+                 sci.med       0.92      0.81      0.86       396
+               sci.space       0.87      0.89      0.88       394
+  soc.religion.christian       0.49      0.97      0.65       398
+      talk.politics.guns       0.63      0.93      0.75       364
+   talk.politics.mideast       0.89      0.91      0.90       376
+      talk.politics.misc       0.95      0.45      0.61       310
+      talk.religion.misc       0.92      0.09      0.17       251
+
+                accuracy                           0.78      7532
+               macro avg       0.82      0.76      0.75      7532
+            weighted avg       0.81      0.78      0.77      7532
+
+Confusion Matrix : 
+[[159   1   0   1   0   0   0   0   0   0   2   7   0   6   5 115   8  14
+    1   0]
+ [  0 273  16  16   9  22   2   4   0   1   0  24   8   0   7   6   0   1
+    0   0]
+ [  0  21 244  49   5  22   1   2   0   3   4  25   1   1   6   8   2   0
+    0   0]
+ [  0   3  22 309  18   2   6   2   2   0   1   8  18   0   1   0   0   0
+    0   0]
+ [  0   5  12  34 298   0   2   3   0   2   2  13   8   2   1   1   2   0
+    0   0]
+ [  0  31  12  10   4 307   1   0   0   1   0  17   1   0   5   2   3   0
+    0   1]
+ [  0   1   2  50  18   2 257  16   5   3   7   4   7   1   2  12   3   0
+    0   0]
+ [  0   0   1   3   0   0   3 360   4   1   2   1   7   0   2   2   8   1
+    1   0]
+ [  0   1   1   0   0   0   1  12 372   0   0   0   3   3   0   4   0   1
+    0   0]
+ [  0   1   0   0   0   0   1   0   2 368  15   2   0   0   0   5   1   2
+    0   0]
+ [  0   0   0   0   0   0   0   0   0   2 387   2   0   0   1   6   1   0
+    0   0]
+ [  0   5   2   0   3   1   1   0   0   1   0 374   1   1   0   4   3   0
+    0   0]
+ [  0   5   3  30   7   1   2  14   5   0   0  60 246   7   4   7   1   1
+    0   0]
+ [  0   9   0   0   0   0   2   4   2   0   2   2   5 322   6  34   6   2
+    0   0]
+ [  1   7   1   0   0   2   0   2   0   0   0  10   4   3 352  10   1   1
+    0   0]
+ [  1   1   1   0   0   0   0   2   0   0   1   1   0   2   1 386   1   1
+    0   0]
+ [  1   0   0   0   0   0   1   1   0   0   2   8   1   0   0   6 340   3
+    1   0]
+ [  0   1   0   0   0   0   0   1   4   1   0   1   0   0   0  14  10 342
+    2   0]
+ [  1   1   0   0   0   0   0   0   0   0   1  14   0   2   8  17 118   8
+  139   1]
+ [ 24   3   0   0   0   0   0   0   3   0   1   5   0   1   4 146  32   6
+    3  23]]
+
+
+First Run: Epochs: 10, Learning Rate: 0.001, Batch Size: 32, Length: 50
+RNN--------------------------------------------------------------
+Is the GPU available? True
+Device cuda
+100%|██████████| 354/354 [00:02<00:00, 169.25it/s]
+Train Loss : 2.891
+Valid Loss : 2.798
+Valid Acc  : 0.120
+100%|██████████| 354/354 [00:01<00:00, 180.34it/s]
+Train Loss : 2.462
+Valid Loss : 2.336
+Valid Acc  : 0.219
+100%|██████████| 354/354 [00:01<00:00, 179.81it/s]
+Train Loss : 1.889
+Valid Loss : 2.039
+Valid Acc  : 0.329
+100%|██████████| 354/354 [00:01<00:00, 178.45it/s]
+Train Loss : 1.342
+Valid Loss : 1.802
+Valid Acc  : 0.441
+100%|██████████| 354/354 [00:01<00:00, 178.98it/s]
+Train Loss : 0.923
+Valid Loss : 1.736
+Valid Acc  : 0.488
+100%|██████████| 354/354 [00:01<00:00, 177.71it/s]
+Train Loss : 0.636
+Valid Loss : 1.734
+Valid Acc  : 0.512
+100%|██████████| 354/354 [00:01<00:00, 178.70it/s]
+Train Loss : 0.445
+Valid Loss : 1.790
+Valid Acc  : 0.523
+100%|██████████| 354/354 [00:01<00:00, 180.15it/s]
+Train Loss : 0.320
+Valid Loss : 1.811
+Valid Acc  : 0.539
+100%|██████████| 354/354 [00:01<00:00, 179.79it/s]
+Train Loss : 0.229
+Valid Loss : 1.945
+Valid Acc  : 0.526
+100%|██████████| 354/354 [00:01<00:00, 179.60it/s]
+Train Loss : 0.171
+Valid Loss : 2.006
+Valid Acc  : 0.539
+General F1@5 is:
+0.3030302822589874
+Test Accuracy : 0.5757575757575758
+
+Classification Report : 
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.50      0.25      0.33         4
+           comp.graphics       0.33      0.33      0.33         3
+ comp.os.ms-windows.misc       0.80      1.00      0.89         4
+comp.sys.ibm.pc.hardware       0.67      0.40      0.50         5
+   comp.sys.mac.hardware       0.75      1.00      0.86         3
+          comp.windows.x       1.00      0.25      0.40         4
+            misc.forsale       0.00      0.00      0.00         4
+               rec.autos       0.50      0.80      0.62         5
+         rec.motorcycles       0.60      1.00      0.75         6
+      rec.sport.baseball       0.80      0.67      0.73         6
+        rec.sport.hockey       0.62      1.00      0.77         5
+               sci.crypt       0.67      0.80      0.73         5
+         sci.electronics       0.50      0.50      0.50         4
+                 sci.med       0.50      0.50      0.50         4
+               sci.space       0.67      0.40      0.50         5
+  soc.religion.christian       0.44      0.57      0.50         7
+      talk.politics.guns       0.56      0.71      0.63         7
+   talk.politics.mideast       0.80      0.67      0.73         6
+      talk.politics.misc       0.75      0.50      0.60         6
+      talk.religion.misc       0.00      0.00      0.00         6
+
+                accuracy                           0.58        99
+               macro avg       0.57      0.57      0.54        99
+            weighted avg       0.57      0.58      0.55        99
+
+
+Confusion Matrix : 
+[[1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 1]
+ [0 1 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 1 0 2 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0]
+ [0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 0 1 0 1 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0]
+ [0 1 0 1 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 4 1 0 0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 6 0 0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 4 2 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0 5 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0 0 4 0 0 0 0 0 0 1 0]
+ [0 0 0 0 0 0 0 1 1 0 0 0 2 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 1 0 0 0 0 2 0 0 1 0 0 0]
+ [0 0 0 0 0 0 0 1 1 0 0 1 0 0 2 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 4 0 0 0 2]
+ [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 5 0 0 1]
+ [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 4 0 1]
+ [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 3 1]
+ [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 2 0 0 0]]
+
+
+
+CNN--------------------------------------------------------------
+Is the GPU available? True
+Device cuda
+100%|██████████| 354/354 [00:05<00:00, 67.15it/s]
+Train Loss : 2.798
+Valid Loss : 2.282
+Valid Acc  : 0.331
+100%|██████████| 354/354 [00:03<00:00, 94.25it/s]
+Train Loss : 1.659
+Valid Loss : 1.876
+Valid Acc  : 0.432
+100%|██████████| 354/354 [00:03<00:00, 92.74it/s]
+Train Loss : 0.944
+Valid Loss : 1.680
+Valid Acc  : 0.491
+100%|██████████| 354/354 [00:03<00:00, 92.86it/s]
+Train Loss : 0.536
+Valid Loss : 1.607
+Valid Acc  : 0.524
+100%|██████████| 354/354 [00:03<00:00, 97.25it/s]
+Train Loss : 0.340
+Valid Loss : 1.619
+Valid Acc  : 0.531
+100%|██████████| 354/354 [00:03<00:00, 99.07it/s] 
+Train Loss : 0.231
+Valid Loss : 1.661
+Valid Acc  : 0.542
+100%|██████████| 354/354 [00:03<00:00, 100.04it/s]
+Train Loss : 0.191
+Valid Loss : 1.719
+Valid Acc  : 0.545
+100%|██████████| 354/354 [00:03<00:00, 100.24it/s]
+Train Loss : 0.162
+Valid Loss : 1.803
+Valid Acc  : 0.543
+100%|██████████| 354/354 [00:03<00:00, 100.49it/s]
+Train Loss : 0.148
+Valid Loss : 1.756
+Valid Acc  : 0.553
+100%|██████████| 354/354 [00:03<00:00, 101.13it/s]
+Train Loss : 0.144
+Valid Loss : 1.817
+Valid Acc  : 0.558
+General F1@5 is:
+0.2693602442741394
+Test Accuracy : 0.5656565656565656
+
+Classification Report : 
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.25      0.25      0.25         4
+           comp.graphics       0.67      0.67      0.67         3
+ comp.os.ms-windows.misc       0.67      1.00      0.80         4
+comp.sys.ibm.pc.hardware       0.67      0.80      0.73         5
+   comp.sys.mac.hardware       0.50      0.33      0.40         3
+          comp.windows.x       0.50      0.25      0.33         4
+            misc.forsale       0.33      0.25      0.29         4
+               rec.autos       0.60      0.60      0.60         5
+         rec.motorcycles       0.86      1.00      0.92         6
+      rec.sport.baseball       0.50      0.83      0.62         6
+        rec.sport.hockey       0.75      0.60      0.67         5
+               sci.crypt       0.75      0.60      0.67         5
+         sci.electronics       0.50      0.50      0.50         4
+                 sci.med       0.67      0.50      0.57         4
+               sci.space       0.33      0.40      0.36         5
+  soc.religion.christian       0.60      0.86      0.71         7
+      talk.politics.guns       0.62      0.71      0.67         7
+   talk.politics.mideast       1.00      0.17      0.29         6
+      talk.politics.misc       0.29      0.33      0.31         6
+      talk.religion.misc       0.50      0.33      0.40         6
+
+                accuracy                           0.57        99
+               macro avg       0.58      0.55      0.54        99
+            weighted avg       0.59      0.57      0.55        99
+
+
+Confusion Matrix : 
+[[1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 1]
+ [0 2 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0]
+ [0 0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 4 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 1 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 1 0 0 1 0 0 0 0 0 1 0 0 0 1 0]
+ [0 0 0 1 0 0 1 0 0 0 0 0 1 0 0 1 0 0 0 0]
+ [0 0 0 0 0 0 1 3 0 1 0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 6 0 0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 5 1 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 2 3 0 0 0 0 0 0 0 0 0]
+ [1 0 0 0 0 0 0 0 0 0 0 3 0 0 0 0 0 0 1 0]
+ [0 0 0 0 0 0 0 1 0 1 0 0 2 0 0 0 0 0 0 0]
+ [0 0 1 0 0 0 0 0 0 0 0 0 0 2 1 0 0 0 0 0]
+ [0 0 1 0 0 0 0 0 0 0 0 0 0 0 2 1 0 0 1 0]
+ [0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 6 0 0 0 0]
+ [0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 5 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0 0 1 1 0 1 0 1 1 1 0]
+ [0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 2 0 2 1]
+ [2 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 2]]
+
+----------------------------------------------------------------------------------------------------------------
+
+BAYES--------------------------------------------------------------
+F1@k for Test Set (Top-10):
+0.17810070969921943
+Test Accuracy : 0.7777482740308019
+Classification Report on Test Set:
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.85      0.50      0.63       319
+           comp.graphics       0.74      0.70      0.72       389
+ comp.os.ms-windows.misc       0.77      0.62      0.69       394
+comp.sys.ibm.pc.hardware       0.62      0.79      0.69       392
+   comp.sys.mac.hardware       0.82      0.77      0.80       385
+          comp.windows.x       0.86      0.78      0.81       395
+            misc.forsale       0.92      0.66      0.77       390
+               rec.autos       0.85      0.91      0.88       396
+         rec.motorcycles       0.93      0.93      0.93       398
+      rec.sport.baseball       0.96      0.93      0.94       397
+        rec.sport.hockey       0.91      0.97      0.94       399
+               sci.crypt       0.65      0.94      0.77       396
+         sci.electronics       0.79      0.63      0.70       393
+                 sci.med       0.92      0.81      0.86       396
+               sci.space       0.87      0.89      0.88       394
+  soc.religion.christian       0.49      0.97      0.65       398
+      talk.politics.guns       0.63      0.93      0.75       364
+   talk.politics.mideast       0.89      0.91      0.90       376
+      talk.politics.misc       0.95      0.45      0.61       310
+      talk.religion.misc       0.92      0.09      0.17       251
+
+                accuracy                           0.78      7532
+               macro avg       0.82      0.76      0.75      7532
+            weighted avg       0.81      0.78      0.77      7532
+
+
+Confusion Matrix : 
+[[159   1   0   1   0   0   0   0   0   0   2   7   0   6   5 115   8  14
+    1   0]
+ [  0 273  16  16   9  22   2   4   0   1   0  24   8   0   7   6   0   1
+    0   0]
+ [  0  21 244  49   5  22   1   2   0   3   4  25   1   1   6   8   2   0
+    0   0]
+ [  0   3  22 309  18   2   6   2   2   0   1   8  18   0   1   0   0   0
+    0   0]
+ [  0   5  12  34 298   0   2   3   0   2   2  13   8   2   1   1   2   0
+    0   0]
+ [  0  31  12  10   4 307   1   0   0   1   0  17   1   0   5   2   3   0
+    0   1]
+ [  0   1   2  50  18   2 257  16   5   3   7   4   7   1   2  12   3   0
+    0   0]
+ [  0   0   1   3   0   0   3 360   4   1   2   1   7   0   2   2   8   1
+    1   0]
+ [  0   1   1   0   0   0   1  12 372   0   0   0   3   3   0   4   0   1
+    0   0]
+ [  0   1   0   0   0   0   1   0   2 368  15   2   0   0   0   5   1   2
+    0   0]
+ [  0   0   0   0   0   0   0   0   0   2 387   2   0   0   1   6   1   0
+    0   0]
+ [  0   5   2   0   3   1   1   0   0   1   0 374   1   1   0   4   3   0
+    0   0]
+ [  0   5   3  30   7   1   2  14   5   0   0  60 246   7   4   7   1   1
+    0   0]
+ [  0   9   0   0   0   0   2   4   2   0   2   2   5 322   6  34   6   2
+    0   0]
+ [  1   7   1   0   0   2   0   2   0   0   0  10   4   3 352  10   1   1
+    0   0]
+ [  1   1   1   0   0   0   0   2   0   0   1   1   0   2   1 386   1   1
+    0   0]
+ [  1   0   0   0   0   0   1   1   0   0   2   8   1   0   0   6 340   3
+    1   0]
+ [  0   1   0   0   0   0   0   1   4   1   0   1   0   0   0  14  10 342
+    2   0]
+ [  1   1   0   0   0   0   0   0   0   0   1  14   0   2   8  17 118   8
+  139   1]
+ [ 24   3   0   0   0   0   0   0   3   0   1   5   0   1   4 146  32   6
+    3  23]]
+
+
+Second Run: Epochs: 10, Learning Rate: 0.01, Batch Size: 32, Length: 100
+RNN--------------------------------------------------------------
+Is the GPU available? True
+Device cuda
+100%|██████████| 354/354 [00:02<00:00, 159.98it/s]
+Train Loss : 2.914
+Valid Loss : 3.231
+Valid Acc  : 0.074
+100%|██████████| 354/354 [00:02<00:00, 168.15it/s]
+Train Loss : 2.414
+Valid Loss : 2.298
+Valid Acc  : 0.238
+100%|██████████| 354/354 [00:02<00:00, 164.96it/s]
+Train Loss : 1.732
+Valid Loss : 2.143
+Valid Acc  : 0.304
+100%|██████████| 354/354 [00:02<00:00, 167.00it/s]
+Train Loss : 1.230
+Valid Loss : 2.189
+Valid Acc  : 0.342
+100%|██████████| 354/354 [00:02<00:00, 166.92it/s]
+Train Loss : 0.857
+Valid Loss : 2.305
+Valid Acc  : 0.360
+100%|██████████| 354/354 [00:02<00:00, 163.50it/s]
+Train Loss : 0.568
+Valid Loss : 2.482
+Valid Acc  : 0.371
+100%|██████████| 354/354 [00:02<00:00, 170.56it/s]
+Train Loss : 0.362
+Valid Loss : 2.547
+Valid Acc  : 0.397
+100%|██████████| 354/354 [00:02<00:00, 171.17it/s]
+Train Loss : 0.221
+Valid Loss : 2.725
+Valid Acc  : 0.399
+100%|██████████| 354/354 [00:02<00:00, 167.20it/s]
+Train Loss : 0.174
+Valid Loss : 2.841
+Valid Acc  : 0.404
+100%|██████████| 354/354 [00:02<00:00, 171.57it/s]
+Train Loss : 0.130
+Valid Loss : 2.958
+Valid Acc  : 0.404
+General F1@10 is:
+0.1763085424900055
+Test Accuracy : 0.494949494949495
+
+Classification Report : 
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.20      0.25      0.22         4
+           comp.graphics       0.33      0.33      0.33         3
+ comp.os.ms-windows.misc       0.50      0.25      0.33         4
+comp.sys.ibm.pc.hardware       0.33      0.40      0.36         5
+   comp.sys.mac.hardware       0.40      0.67      0.50         3
+          comp.windows.x       1.00      0.50      0.67         4
+            misc.forsale       0.00      0.00      0.00         4
+               rec.autos       0.50      0.80      0.62         5
+         rec.motorcycles       0.67      0.67      0.67         6
+      rec.sport.baseball       0.71      0.83      0.77         6
+        rec.sport.hockey       0.67      0.80      0.73         5
+               sci.crypt       0.67      0.40      0.50         5
+         sci.electronics       0.25      0.25      0.25         4
+                 sci.med       0.20      0.25      0.22         4
+               sci.space       0.40      0.80      0.53         5
+  soc.religion.christian       0.36      0.57      0.44         7
+      talk.politics.guns       0.67      0.57      0.62         7
+   talk.politics.mideast       1.00      0.33      0.50         6
+      talk.politics.misc       1.00      0.67      0.80         6
+      talk.religion.misc       0.33      0.17      0.22         6
+
+                accuracy                           0.49        99
+               macro avg       0.51      0.48      0.46        99
+            weighted avg       0.54      0.49      0.49        99
+
+
+Confusion Matrix : 
+[[1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 1]
+ [0 1 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0]
+ [0 0 1 1 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0]
+ [0 0 0 2 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0]
+ [0 0 1 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 1 0 0 0 2 0 1 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 1 0 2 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 4 0 0 0 0 0 0 1 0 0 0 0 0]
+ [0 0 0 0 0 0 0 2 4 0 0 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 5 1 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 1 4 0 0 0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0 0 2 1 0 2 0 0 0 0 0]
+ [0 0 0 1 1 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0]
+ [1 0 0 0 0 0 0 0 0 0 0 0 0 1 2 0 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 0 0 0 0 1 4 0 0 0 0 0]
+ [1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 4 0 0 0 1]
+ [0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 1 4 0 0 0]
+ [0 0 0 0 0 0 0 0 1 0 0 1 0 1 0 0 1 2 0 0]
+ [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 4 0]
+ [2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 1]]
+
+
+CNN--------------------------------------------------------------
+Is the GPU available? True
+Device cuda
+100%|██████████| 354/354 [00:04<00:00, 80.83it/s]
+Train Loss : 4.218
+Valid Loss : 2.446
+Valid Acc  : 0.305
+100%|██████████| 354/354 [00:03<00:00, 91.54it/s]
+Train Loss : 1.854
+Valid Loss : 2.689
+Valid Acc  : 0.375
+100%|██████████| 354/354 [00:03<00:00, 91.85it/s]
+Train Loss : 1.881
+Valid Loss : 2.835
+Valid Acc  : 0.414
+100%|██████████| 354/354 [00:03<00:00, 90.39it/s]
+Train Loss : 2.091
+Valid Loss : 3.127
+Valid Acc  : 0.423
+100%|██████████| 354/354 [00:03<00:00, 91.56it/s]
+Train Loss : 2.390
+Valid Loss : 4.417
+Valid Acc  : 0.433
+100%|██████████| 354/354 [00:03<00:00, 89.67it/s]
+Train Loss : 2.430
+Valid Loss : 3.768
+Valid Acc  : 0.451
+100%|██████████| 354/354 [00:03<00:00, 91.28it/s]
+Train Loss : 2.323
+Valid Loss : 4.353
+Valid Acc  : 0.437
+100%|██████████| 354/354 [00:03<00:00, 91.12it/s]
+Train Loss : 2.683
+Valid Loss : 4.807
+Valid Acc  : 0.447
+100%|██████████| 354/354 [00:03<00:00, 91.68it/s]
+Train Loss : 2.506
+Valid Loss : 5.166
+Valid Acc  : 0.453
+100%|██████████| 354/354 [00:03<00:00, 89.44it/s]
+Train Loss : 2.428
+Valid Loss : 5.617
+Valid Acc  : 0.430
+General F1@10 is:
+0.15610653162002563
+Test Accuracy : 0.5151515151515151
+
+Classification Report : 
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.20      0.25      0.22         4
+           comp.graphics       0.11      0.67      0.18         3
+ comp.os.ms-windows.misc       0.00      0.00      0.00         4
+comp.sys.ibm.pc.hardware       0.20      0.20      0.20         5
+   comp.sys.mac.hardware       0.33      0.33      0.33         3
+          comp.windows.x       1.00      0.75      0.86         4
+            misc.forsale       0.00      0.00      0.00         4
+               rec.autos       0.50      0.60      0.55         5
+         rec.motorcycles       1.00      0.67      0.80         6
+      rec.sport.baseball       0.71      0.83      0.77         6
+        rec.sport.hockey       1.00      0.60      0.75         5
+               sci.crypt       0.75      0.60      0.67         5
+         sci.electronics       0.33      0.25      0.29         4
+                 sci.med       1.00      0.50      0.67         4
+               sci.space       0.75      0.60      0.67         5
+  soc.religion.christian       0.78      1.00      0.88         7
+      talk.politics.guns       0.67      0.29      0.40         7
+   talk.politics.mideast       1.00      0.50      0.67         6
+      talk.politics.misc       0.57      0.67      0.62         6
+      talk.religion.misc       0.33      0.50      0.40         6
+
+                accuracy                           0.52        99
+               macro avg       0.56      0.49      0.50        99
+            weighted avg       0.60      0.52      0.53        99
+
+
+Confusion Matrix : 
+[[1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3]
+ [0 2 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 2 0 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0]
+ [0 3 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 1 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 1 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 1 0 1 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0]
+ [1 1 0 0 0 0 0 3 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 1 0 0 0 0 0 0 4 0 0 0 1 0 0 0 0 0 0 0]
+ [0 1 0 0 0 0 0 0 0 5 0 0 0 0 0 0 0 0 0 0]
+ [0 1 0 0 0 0 0 0 0 1 3 0 0 0 0 0 0 0 0 0]
+ [0 1 0 0 1 0 0 0 0 0 0 3 0 0 0 0 0 0 0 0]
+ [1 0 0 0 0 0 0 1 0 0 0 0 1 0 0 1 0 0 0 0]
+ [0 0 0 1 0 0 0 0 0 0 0 0 0 2 0 0 0 0 1 0]
+ [1 0 0 0 0 0 0 0 0 0 0 0 0 0 3 0 0 0 0 1]
+ [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 7 0 0 0 0]
+ [1 2 0 0 0 0 0 1 0 0 0 0 0 0 0 0 2 0 0 1]
+ [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 2 1]
+ [0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 4 0]
+ [0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 3]]
+
+----------------------------------------------------------------------------------------------------------------
+Third Run: Epochs: 10, Learning Rate: 0.1, Batch Size: 50, Length: 60
+RNN--------------------------------------------------------------
+
+Is the GPU available? True
+Device cuda
+100%|██████████| 227/227 [00:01<00:00, 163.78it/s]
+Train Loss : 3.561
+Valid Loss : 3.713
+Valid Acc  : 0.056
+100%|██████████| 227/227 [00:01<00:00, 179.72it/s]
+Train Loss : 3.789
+Valid Loss : 3.779
+Valid Acc  : 0.065
+100%|██████████| 227/227 [00:01<00:00, 181.27it/s]
+Train Loss : 3.831
+Valid Loss : 4.053
+Valid Acc  : 0.061
+100%|██████████| 227/227 [00:01<00:00, 181.17it/s]
+Train Loss : 3.826
+Valid Loss : 3.865
+Valid Acc  : 0.054
+100%|██████████| 227/227 [00:01<00:00, 180.73it/s]
+Train Loss : 3.761
+Valid Loss : 3.874
+Valid Acc  : 0.060
+100%|██████████| 227/227 [00:01<00:00, 177.95it/s]
+Train Loss : 3.759
+Valid Loss : 3.812
+Valid Acc  : 0.058
+100%|██████████| 227/227 [00:01<00:00, 181.74it/s]
+Train Loss : 3.767
+Valid Loss : 3.861
+Valid Acc  : 0.057
+100%|██████████| 227/227 [00:01<00:00, 180.77it/s]
+Train Loss : 3.723
+Valid Loss : 3.870
+Valid Acc  : 0.075
+100%|██████████| 227/227 [00:01<00:00, 180.43it/s]
+Train Loss : 3.718
+Valid Loss : 3.800
+Valid Acc  : 0.063
+100%|██████████| 227/227 [00:01<00:00, 180.16it/s]
+Train Loss : 3.722
+Valid Loss : 3.899
+Valid Acc  : 0.059
+General F1@10 is:
+0.08264462649822235
+Test Accuracy : 0.06060606060606061
+
+Classification Report : 
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.00      0.00      0.00         4
+           comp.graphics       0.00      0.00      0.00         3
+ comp.os.ms-windows.misc       0.00      0.00      0.00         4
+comp.sys.ibm.pc.hardware       0.14      0.40      0.21         5
+   comp.sys.mac.hardware       0.00      0.00      0.00         3
+          comp.windows.x       0.00      0.00      0.00         4
+            misc.forsale       0.00      0.00      0.00         4
+               rec.autos       0.00      0.00      0.00         5
+         rec.motorcycles       0.00      0.00      0.00         6
+      rec.sport.baseball       0.05      0.17      0.08         6
+        rec.sport.hockey       0.00      0.00      0.00         5
+               sci.crypt       0.00      0.00      0.00         5
+         sci.electronics       0.00      0.00      0.00         4
+                 sci.med       0.14      0.25      0.18         4
+               sci.space       0.00      0.00      0.00         5
+  soc.religion.christian       0.00      0.00      0.00         7
+      talk.politics.guns       0.20      0.14      0.17         7
+   talk.politics.mideast       0.00      0.00      0.00         6
+      talk.politics.misc       0.12      0.17      0.14         6
+      talk.religion.misc       0.00      0.00      0.00         6
+
+                accuracy                           0.06        99
+               macro avg       0.03      0.06      0.04        99
+            weighted avg       0.04      0.06      0.04        99
+
+
+Confusion Matrix : 
+[[0 0 0 0 1 0 0 0 0 1 0 2 0 0 0 0 0 0 0 0]
+ [0 0 0 1 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0]
+ [0 0 0 1 0 0 0 0 0 0 0 0 0 1 0 0 1 0 1 0]
+ [1 0 0 2 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0]
+ [0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0]
+ [0 0 0 1 0 0 0 1 1 0 0 0 1 0 0 0 0 0 0 0]
+ [0 0 0 1 0 0 0 0 0 2 0 0 0 0 0 1 0 0 0 0]
+ [0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 1 2]
+ [1 0 0 1 0 0 0 0 0 3 0 0 1 0 0 0 0 0 0 0]
+ [0 0 0 2 0 0 0 0 0 1 0 0 1 0 0 0 0 0 2 0]
+ [0 0 0 1 0 0 0 0 0 1 0 0 1 0 0 1 0 0 1 0]
+ [0 0 0 0 0 0 1 0 0 2 0 0 1 0 0 0 0 0 1 0]
+ [0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 1 0 1 0 0]
+ [0 0 0 0 0 0 0 0 0 1 0 1 0 1 0 0 0 0 0 1]
+ [0 0 0 1 0 0 0 1 1 0 0 0 1 0 0 0 1 0 0 0]
+ [1 0 1 0 0 0 0 0 1 1 0 0 0 0 0 0 1 1 1 0]
+ [0 0 0 1 0 1 0 0 0 2 0 0 1 1 0 0 1 0 0 0]
+ [0 1 0 1 0 0 0 0 0 1 0 1 0 1 1 0 0 0 0 0]
+ [0 1 0 0 1 0 0 0 0 0 0 0 2 1 0 0 0 0 1 0]
+ [0 0 1 0 1 0 0 0 0 0 0 1 0 2 0 0 0 1 0 0]]
+
+
+CNN--------------------------------------------------------------
+Is the GPU available? True
+Device cuda
+100%|██████████| 227/227 [00:02<00:00, 80.52it/s]
+Train Loss : 19.130
+Valid Loss : 5.598
+Valid Acc  : 0.054
+100%|██████████| 227/227 [00:02<00:00, 94.37it/s]
+Train Loss : 21.086
+Valid Loss : 22.532
+Valid Acc  : 0.053
+100%|██████████| 227/227 [00:02<00:00, 94.17it/s]
+Train Loss : 24.920
+Valid Loss : 26.447
+Valid Acc  : 0.056
+100%|██████████| 227/227 [00:02<00:00, 94.54it/s]
+Train Loss : 38.291
+Valid Loss : 33.119
+Valid Acc  : 0.052
+100%|██████████| 227/227 [00:02<00:00, 93.48it/s]
+Train Loss : 42.629
+Valid Loss : 20.146
+Valid Acc  : 0.053
+100%|██████████| 227/227 [00:02<00:00, 94.27it/s]
+Train Loss : 20.692
+Valid Loss : 22.951
+Valid Acc  : 0.055
+100%|██████████| 227/227 [00:02<00:00, 93.86it/s]
+Train Loss : 42.230
+Valid Loss : 31.814
+Valid Acc  : 0.054
+100%|██████████| 227/227 [00:02<00:00, 93.84it/s]
+Train Loss : 22.547
+Valid Loss : 24.544
+Valid Acc  : 0.053
+100%|██████████| 227/227 [00:02<00:00, 93.69it/s]
+Train Loss : 15.147
+Valid Loss : 27.300
+Valid Acc  : 0.053
+100%|██████████| 227/227 [00:02<00:00, 93.97it/s]
+Train Loss : 3.379
+Valid Loss : 26.606
+Valid Acc  : 0.051
+
+General F1@10 is:
+0.09182736277580261
+Test Accuracy : 0.030303030303030304
+
+Classification Report : 
+                          precision    recall  f1-score   support
+
+             alt.atheism       0.00      0.00      0.00         4
+           comp.graphics       0.03      1.00      0.06         3
+ comp.os.ms-windows.misc       0.00      0.00      0.00         4
+comp.sys.ibm.pc.hardware       0.00      0.00      0.00         5
+   comp.sys.mac.hardware       0.00      0.00      0.00         3
+          comp.windows.x       0.00      0.00      0.00         4
+            misc.forsale       0.00      0.00      0.00         4
+               rec.autos       0.00      0.00      0.00         5
+         rec.motorcycles       0.00      0.00      0.00         6
+      rec.sport.baseball       0.00      0.00      0.00         6
+        rec.sport.hockey       0.00      0.00      0.00         5
+               sci.crypt       0.00      0.00      0.00         5
+         sci.electronics       0.00      0.00      0.00         4
+                 sci.med       0.00      0.00      0.00         4
+               sci.space       0.00      0.00      0.00         5
+  soc.religion.christian       0.00      0.00      0.00         7
+      talk.politics.guns       0.00      0.00      0.00         7
+   talk.politics.mideast       0.00      0.00      0.00         6
+      talk.politics.misc       0.00      0.00      0.00         6
+      talk.religion.misc       0.00      0.00      0.00         6
+
+                accuracy                           0.03        99
+               macro avg       0.00      0.05      0.00        99
+            weighted avg       0.00      0.03      0.00        99
+
+
+Confusion Matrix : 
+[[0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 3 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0]
+ [0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 5 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 4 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0]
+ [0 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 7 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]
+ [0 6 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]]
